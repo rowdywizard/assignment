@@ -1,0 +1,18 @@
+<mat-accordion multi="true" *ngIf="employees.length > 0">
+  <mat-expansion-panel *ngFor="let employee of employees">
+    <mat-expansion-panel-header>
+      {{ employee.firstName }}
+    </mat-expansion-panel-header>
+    <p>{{ employee.firstName }}</p>
+    <p>{{ employee.lastName }}</p>
+    <p>{{ employee.dob }}</p>
+    <p>{{ employee.department }}</p>
+    <p>{{ employee.basicSalary }}</p>
+    <p>{{ employee.designation }}</p>
+    <mat-action-row>
+      <a mat-button color="primary" [routerLink]="['/edit', employee.id]" routerLinkActive="router-link-active" >EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(employee.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<p class="info-text mat-body-1" *ngIf="employees.length <=0">No Employee Added Yet</p>

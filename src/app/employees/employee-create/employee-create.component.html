@@ -1,0 +1,76 @@
+<mat-card>
+  <form (submit)="onSaveEmployee(employeeForm)" #employeeForm="ngForm">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="firstName"
+        [ngModel]="employee?.firstName"
+        required
+        #firstName="ngModel"
+        placeholder="First Name">
+        <mat-error *ngIf="firstName.invalid">Please enter first name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="lastName"
+        [ngModel]="employee?.lastName"
+        required
+        #lastName="ngModel"
+        placeholder="Last Name">
+        <mat-error *ngIf="lastName.invalid">Please enter last name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="dob"
+        [ngModel]="employee?.dob"
+        required
+        #dob="ngModel"
+        placeholder="Date Of Birth">
+        <mat-error *ngIf="dob.invalid">Please enter dob</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="department"
+        [ngModel]="employee?.department"
+        required
+        #department="ngModel"
+        placeholder="Department">
+        <mat-error *ngIf="department.invalid">Please enter department name</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="basicSalary"
+        [ngModel]="employee?.basicSalary"
+        required
+        #basicSalary="ngModel"
+        placeholder="Basic Salary">
+        <mat-error *ngIf="basicSalary.invalid">Please enter basicSalary</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        name="designation"
+        [ngModel]="employee?.designation"
+        required
+        #designation="ngModel"
+        placeholder="Designation">
+        <mat-error *ngIf="designation.invalid">Please enter designation</mat-error>
+    </mat-form-field>
+    <button
+      type="submit"
+      mat-raised-button
+      color="accent">
+      Save Employee
+    </button>
+  </form>
+</mat-card>
