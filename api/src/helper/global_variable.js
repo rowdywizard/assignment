@@ -1,0 +1,1 @@
+global.apiUserId = 0;

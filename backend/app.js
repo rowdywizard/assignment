@@ -6,7 +6,9 @@ const Employee = require('./models/employee');
 
 const app = express();
 
-mongoose.connect("mongodb+srv://assignment_user:U2WKGhpcjWPvNyir@assignment-db-zlisk.mongodb.net/node-angular?retryWrites=true&w=majority")
+var mongoURL = "mongodb+srv://assignment_user:U2WKGhpcjWPvNyir@assignment-db-zlisk.mongodb.net/node-angular?retryWrites=true&w=majority";
+
+mongoose.connect(mongoURL, { useNewUrlParser : true })
   .then(()=>{
     console.log('Connected to database.');
   })
@@ -15,6 +17,7 @@ mongoose.connect("mongodb+srv://assignment_user:U2WKGhpcjWPvNyir@assignment-db-z
   });
 
 app.use(bodyParser.json());
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
@@ -30,6 +33,7 @@ app.use((req, res, next) => {
   next();
 });
 
+// Add new employee
 app.post('/api/employees', (req, res, next) => {
 
   const employee = new Employee({
@@ -40,6 +44,7 @@ app.post('/api/employees', (req, res, next) => {
     basicSalary: req.body.basicSalary,
     designation: req.body.designation
   });
+
   employee.save(employee).then( createdEmployee => {
     res.status(201).json({
       message: "Employee added successfully!",
@@ -49,6 +54,7 @@ app.post('/api/employees', (req, res, next) => {
 
 });
 
+// Update new employee
 app.put('/api/employees/:id', (req, res, next) => {
 
   const employee = new Employee({
@@ -66,6 +72,7 @@ app.put('/api/employees/:id', (req, res, next) => {
   });
 });
 
+// Get all employees
 app.get('/api/employees', (req, res, next) => {
   Employee.find()
   .then(documents => {
@@ -77,16 +84,18 @@ app.get('/api/employees', (req, res, next) => {
 
 });
 
-app.get('/api/employees', (req, res, next) => {
+// Get single employee
+app.get('/api/employees/:id', (req, res, next) => {
   Employee.findById(req.params.id).then( employee => {
     if(employee){
-      res.status(200).json(post);
+      res.status(200).json(employee);
     } else {
       res.status(404).json({message: "Employee not found!"});
     }
   });
 });
 
+// Delete employee
 app.delete('/api/employees/:id', (req, res, next) => {
 
   Employee.deleteOne({_id: req.params.id}).then( result => {
@@ -94,5 +103,5 @@ app.delete('/api/employees/:id', (req, res, next) => {
     res.status(200).json({ message: "Employee deleted!" });
   })
 });
-module.exports = app;
 
+module.exports = app;
